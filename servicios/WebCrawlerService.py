@@ -19,6 +19,7 @@ class WebCrawler(Resource):
                 print(page.status_code)
                 soup = BeautifulSoup(page.content, 'html.parser')    
             response = {'Status_code' : page.status_code, 'Message':'Dump DONE'}
+            print(soup)
             logging.info("response : "+str(response))
             
         except Exception as e:
