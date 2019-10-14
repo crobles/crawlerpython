@@ -1,4 +1,4 @@
-Contenedor Orquestador de Crawler's
+Contenedor Crawler's
 ============
 
 Docker con imagen base **registrysecaas.azurecr.io/secaas/python:3-latest**
