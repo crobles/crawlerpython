@@ -74,21 +74,3 @@ class ListWebCrawler(Resource):
 
         except Exception as e:
             logging.error("Exception {}".format(e))
-            
-
-
-# ----------------
-# import requests
-# from bs4 import BeautifulSoup
-
-# url = "https://articulo.mercadolibre.cl/MLC-463906296-skis-atomic-expert-hv-series-6-con-fijaciones-_JM"
-# page = requests.get(url)
-
-# # print(page.status_code)
-
-# # print(page.content)
-
-# soup = BeautifulSoup(page.content, 'html.parser')
-# # print(soup.prettify())
-
-# print(soup)
