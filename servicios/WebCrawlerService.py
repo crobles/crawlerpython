@@ -54,7 +54,7 @@ class ListWebCrawler(Resource):
             if args['UrlList'] is not None:
                 baseUrl = re.findall(r'^.+?[^\/:](?=[?\/]|$)',args['UrlList'])
                 page = requests.get(args['UrlList'],headers=header)
-                soup = BeautifulSoup(page.content,'lxml')
+                soup = BeautifulSoup(page.content,'html5lib')
                 # '''
                 # patron de amazon href = a-link-normal a-text-normal (textos con links)
                 # patron para amazon href = a-last (paginacion)
