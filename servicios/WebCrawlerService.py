@@ -22,12 +22,7 @@ class WebCrawler(Resource):
                 print(page.status_code)
                 soup = BeautifulSoup(page.content, 'html.parser')    
             response = {'Status_code' : page.status_code, 'Message':'Dump DONE'}
-            print(soup)
-            THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-            my_file = os.path.join(THIS_FOLDER, str(args['Url'])+'.html')
-            f = open (str(filename).replace(".","").replace("http://","").replace("https://","").replace("/","")+'.html','w')
-            f.write(str(soup))
-            f.close()
+            
             logging.info("response : "+str(response))
             
         except Exception as e:
@@ -65,12 +60,10 @@ class ListWebCrawler(Resource):
                     ListOfUrl.append(str(baseUrl[0])+item.get('href'))
                 for a in soup.findAll('li',{'class':'a-last'}):
                     for b in a.findAll('a'):
-                        
                         NextPage=str(baseUrl[0])+b.get('href')
-             
             response = {'Status_code' : page.status_code, 'BaseUrl':baseUrl[0],'NextPageUrl':NextPage, 'ListOfUrl':ListOfUrl}
-            # print(response)
-            return response
 
         except Exception as e:
             logging.error("Exception {}".format(e))
+        
+        return response
