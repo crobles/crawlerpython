@@ -5,7 +5,7 @@ services:
 stages:
 - build
 - test
-- release
+- qa
 
 variables:
   ACR_HUB: registrysecaas.azurecr.io
