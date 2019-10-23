@@ -5,9 +5,15 @@ services:
 stages:
 - build
 - test
+- release
 
-before-script:
-  - docker login registrysecaas.azurecr.io -u 6cd549d2-1f38-44cc-abd8-e7f38243edf0 -p 5a1d6af7-d62f-4979-a49c-3b0c40baaed1
+variables:
+  ACR_HUB: registrysecaas.azurecr.io
+  ACR_U: 6cd549d2-1f38-44cc-abd8-e7f38243edf0
+  ACR_P: 5a1d6af7-d62f-4979-a49c-3b0c40baaed1
+
+before_script:
+  - docker login $ACR_HUB -u $ACR_U -p $ACR_P
 
 build-server:
   stage: build
