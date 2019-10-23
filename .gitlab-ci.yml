@@ -13,7 +13,7 @@ variables:
   ACR_P: 5a1d6af7-d62f-4979-a49c-3b0c40baaed1
 
 before_script:
-  - docker login $ACR_HUB -u $ACR_U -p $ACR_P
+  - sudo docker login $ACR_HUB -u $ACR_U -p $ACR_P
 
 build-server:
   stage: build
