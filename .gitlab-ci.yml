@@ -24,5 +24,11 @@ test-server:
   stage: test
   script:
     - docker run crawler-python coverage report
-    
 
+#######################################
+# Check the project code quality with Sonar, make sure your Gitlab project has a secret variable (project -> settings -> CI/CD) defined called SONAR_TOKEN
+#######################################
+codequality:
+  stage: qa
+  script:
+    - sonar-scanner -Dsonar.projectKey=crawler-python -Dsonar.organization=crawler-python -Dsonar.sources=. \Dsonar.host.url=https://sonarcloud.io \Dsonar.login=c108dc5740506049bdff77693be28524cae93715
