@@ -14,6 +14,10 @@ variables:
 
 before_script:
   - docker login --username $ACR_U --password $ACR_P $ACR_HUB
+  - export SONAR_SCANNER_VERSION=4.0.0.1744
+  - export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux
+  - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
+  - export SONAR_SCANNER_OPTS="-server"
 
 build-server:
   stage: build
