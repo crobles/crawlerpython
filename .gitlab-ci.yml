@@ -18,16 +18,7 @@ variables:
 
 before_script:
   - docker login --username $ACR_U --password $ACR_P $ACR_HUB
-  - export SONAR_SCANNER_VERSION=4.0.0.1744
-  - export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux
-  - rm -rf $SONAR_SCANNER_HOME
-  - mkdir -p $SONAR_SCANNER_HOME
-  - curl -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
-  - unzip $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
-  - rm $HOME/.sonar/sonar-scanner.zip
-  - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
-  - export SONAR_SCANNER_OPTS="-server"
-  
+
 build-server:
   stage: build
   script:
@@ -36,7 +27,7 @@ build-server:
 test-server:
   stage: test
   script:
-    - docker run crawler-python coverage report
+    - docker run crawler-python coverage xml -i 
 
 #######################################
 # Check the project code quality with Sonar, make sure your Gitlab project has a secret variable (project -> settings -> CI/CD) defined called SONAR_TOKEN
@@ -44,4 +35,18 @@ test-server:
 codequality:
   stage: qa
   script:
-    - sonar-scanner -Dsonar.projectKey=mmc1-v1 -Dsonar.organization=mmc-1 -Dsonar.sources=. \Dsonar.host.url=https://sonarcloud.io \Dsonar.login==5d694cdc45dbf55340808ab09be3bcdecc2327eb
+    - export SONAR_SCANNER_VERSION=4.0.0.1744
+    - export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux
+    - rm -rf $SONAR_SCANNER_HOME
+    - mkdir -p $SONAR_SCANNER_HOME
+    - curl -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
+    - unzip $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
+    - rm $HOME/.sonar/sonar-scanner.zip
+    - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
+    - export SONAR_SCANNER_OPTS="-server"
+    - sonar-scanner \
+      -Dsonar.projectKey=mmc-1v1 \
+      -Dsonar.organization=mmc-1 \
+      -Dsonar.sources=. \
+      -Dsonar.host.url=https://sonarcloud.io \
+      -Dsonar.login=5d694cdc45dbf55340808ab09be3bcdecc2327eb
