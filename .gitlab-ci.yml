@@ -32,16 +32,7 @@ test-server:
 #######################################
 # Check the project code quality with Sonar, make sure your Gitlab project has a secret variable (project -> settings -> CI/CD) defined called SONAR_TOKEN
 #######################################
-# codequality:
-#   stage: qa
-#   script:
-#     - sonar-scanner -Dsonar.projectKey=crawler-python -Dsonar.organization=crawler-python -Dsonar.sources=. \Dsonar.host.url=https://sonarcloud.io \Dsonar.login=c108dc5740506049bdff77693be28524cae93715
-
-sonarqube:
+codequality:
   stage: qa
-  image: ciricihq/gitlab-sonar-scanner
-  variables:
-    SONAR_URL: https://sonarcloud.io
-    SONAR_ANALYSIS_MODE: issues
   script:
-  - gitlab-sonar-scanner
+    - sonar-scanner -Dsonar.projectKey=mmc1-v1 -Dsonar.organization=mmc-1 -Dsonar.sources=. \Dsonar.host.url=https://sonarcloud.io \Dsonar.login==5d694cdc45dbf55340808ab09be3bcdecc2327eb
