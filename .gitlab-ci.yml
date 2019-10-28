@@ -44,5 +44,5 @@ codequality:
     - rm $HOME/.sonar/sonar-scanner.zip
     - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
     - export SONAR_SCANNER_OPTS="-server"
-    - sonar-scanner -Dsonar.projectKey=mmc-1v1 -Dsonar.organization=mmc-1 -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=5d694cdc45dbf55340808ab09be3bcdecc2327eb
+    - sonar-scanner -Dsonar.projectKey=mmc-1v1 -Dsonar.organization=mmc-1 -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=5d694cdc45dbf55340808ab09be3bcdecc2327eb -sonar.python.coverage.reportPath=coverage.xml
     - if [ "true," == $(curl "https://sonarcloud.io/api/qualitygates/get_by_project?organization=mmc-1&project=mmc-1v1"|json_pp|grep default|awk '{print $3}') ];then echo "PASSED"; else exit 141; fi
