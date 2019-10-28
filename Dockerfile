@@ -12,8 +12,7 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev
 
 RUN pip install -r requirements.txt
 USER python
-RUN pytest && coverage xml -i
-RUN ls
+
 
 
 CMD ["python", "app.py"]
