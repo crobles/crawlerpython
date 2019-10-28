@@ -23,8 +23,6 @@ def test_WebCrawler_Exception():
     data = json.loads(response.get_data(as_text=True))
     assert response.status_code == 500
     
-
-
 def test_ListWebCrawler():
     response = app.test_client().post(
         '/api/v1/ListWebCrawler',
