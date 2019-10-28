@@ -45,7 +45,7 @@ class ListWebCrawler(Resource):
             NextPage = None
             ListOfUrl = []
             baseUrl = None
-            header = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36", "Accept-Encoding":"gzip, deflate", "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "DNT":"1","Connection":"close", "Upgrade-Insecure-Requests":"1"}
+            header = {"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36", "Accept-Encoding":"gzip, deflate", "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "DNT":"1","Connection":"close", "Upgrade-Insecure-Requests":"1"}
             if args['UrlList'] is not None:
                 baseUrl = re.findall(r'^.+?[^\/:](?=[?\/]|$)',args['UrlList'])
                 page = requests.get(args['UrlList'],headers=header)
@@ -61,6 +61,7 @@ class ListWebCrawler(Resource):
                 for a in soup.findAll('li',{'class':'a-last'}):
                     for b in a.findAll('a'):
                         NextPage=str(baseUrl[0])+b.get('href')
+                
             response = {'Status_code' : page.status_code, 'BaseUrl':baseUrl[0],'NextPageUrl':NextPage, 'ListOfUrl':ListOfUrl}
 
         except Exception as e:
